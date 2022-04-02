@@ -11,6 +11,17 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    
+        protected $primaryKey = 'user_id';
+    // Postsテーブルとのリレーション （主テーブル側）
+     public function posts() {
+        return $this->hasMany('App\Models\Post');
+    }
+
+// Postsテーブルとの多対多リレーション
+     public function favo_posts() {
+        return $this->belongsToMany('App\Models\Post');
+    }
 
     /**
      * The attributes that are mass assignable.
