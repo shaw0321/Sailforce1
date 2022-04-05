@@ -22,6 +22,11 @@ class User extends Authenticatable
      public function favo_posts() {
         return $this->belongsToMany('App\Models\Post');
     }
+    
+    // tagテーブルとの多対多リレーション
+     public function tags() {
+        return $this->belongsToMany('App\Models\Tag');
+    }
 
     /**
      * The attributes that are mass assignable.

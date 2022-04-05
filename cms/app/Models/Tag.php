@@ -16,7 +16,7 @@ class Tag extends Model
         return $this->belongsToMany('App\Models\User');
     }
     
-        // Userテーブルとの多対多リレーション
+    // postテーブルとの多対多リレーション
      public function tag_post() {
         return $this->belongsToMany('App\Models\Post');
     }

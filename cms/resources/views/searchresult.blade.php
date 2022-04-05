@@ -8,7 +8,7 @@
         <!-- バリデーションエラーの表示に使用-->
         
         <!-- 検索フォーム -->
-        <form action="{{ url('contentslist') }}" method="POST" class="form-horizontal">
+        <form action="{{ url('searchresult') }}" method="POST" class="form-horizontal">
             {{ csrf_field() }}
             <!-- 入力フォーム -->
             <div class="container">
@@ -33,7 +33,8 @@
  <!-- 全ての投稿リスト -->
     <div class="row mb-2">
         <div class="col-md-6">
-            @if(count($posts) > 0)
+
+            @if($posts->count() > 0)
                 <div class="card flex-md-row mb-4 shadow-sm h-md-250">
                     <div class="card-body d-flex flex-column align-items-start">
                       <strong class="d-inline-block mb-2 text-primary">#新規事業#1年目#まず初めに　</strong>
@@ -60,7 +61,8 @@
         </div>
     
         <div class="col-md-6">
-            @if(count($users) > 0)
+
+            @if($users->count() > 0)
             <div class="card flex-md-row mb-4 shadow-sm h-md-250">
                 <div class="card-body d-flex flex-column align-items-start">
                   <strong class="d-inline-block mb-2 text-success">＃医療　＃治験　＃キャッシュレス　＃新規事業</strong>

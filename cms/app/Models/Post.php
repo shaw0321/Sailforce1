@@ -20,4 +20,10 @@ public function user(): BelongsTo
      public function favo_user() {
         return $this->belongsToMany('App\Models\User');
     }
+    
+    // tagテーブルとの多対多リレーション
+     public function tags() {
+        return $this->belongsToMany('App\Models\Tag');
+    }
+
 }

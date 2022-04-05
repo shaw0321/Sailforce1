@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use App\Models\Post; //この行を上に追加
 use App\Models\User;//この行を上に追加
 use Auth;//この行を上に追加
@@ -19,13 +20,35 @@ class PostsController extends Controller
      */
     public function index(Request $request)
     {
-        
-        $posts = Post::get();
-        $users = User::get();
         $searchwords = $request->searchwords ;
         
+               // もし検索フォームにキーワードが入力されたら
+        if ($searchwords !== null) {
+            
+            // クエリビルダ
+            $userquery = User::query();
+            $postquery = Post::query();
+
+            // 全角スペースを半角に変換
+            $spaceConversion = mb_convert_kana($searchwords, 's');
+
+            // 単語を半角スペースで区切り、配列にする（例："山田 翔" → ["山田", "翔"]）
+            $wordArraySearched = preg_split('/[\s,]+/', $spaceConversion, -1, PREG_SPLIT_NO_EMPTY);
+
+
+            // 単語をループで回し、ユーザーネームと部分一致するものがあれば、$queryとして保持される
+            foreach($wordArraySearched as $value) {
+                $userquery->where('name', 'like', '%'.$value.'%');
+                $postquery->where('post_title', 'like', '%'.$value.'%');
+            };
+        }
+        
+        // $users = $userquery->toArray();
+        // $posts = $postquery->toArray();
+
+
         //
-        return view('searchresult' ,['posts' => $posts, 'users' => $users ,'searchwords' => $searchwords ]);
+        return view('searchresult' ,['posts' => $postquery, 'users' => $userquery ,'searchwords' => $searchwords ]);
     }
 
     /**
