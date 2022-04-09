@@ -13,7 +13,7 @@ class Tag extends Model
     
     // Userテーブルとの多対多リレーション
      public function tag_user() {
-        return $this->belongsToMany('App\Models\User');
+        return $this->belongsToMany('App\Models\User', 'user_tag','tag_id','user_id');
     }
     
     // postテーブルとの多対多リレーション

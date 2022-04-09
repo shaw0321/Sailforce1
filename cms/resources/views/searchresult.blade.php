@@ -52,7 +52,7 @@
                       <h3 class="mb-0">
                         <a class="text-dark" href="{{ url('post/'.$post->post_id ) }}">{{ $post->post_title }}</a>
                       </h3>
-                      <div class="mb-1 text-muted">{{ $post->created_at }}  </div>
+                      <div class="mb-1 text-muted">{{ $post->user->name }}  {{ $post->created_at }}  </div>
                       <p class="card-text mb-auto">{{ $post->post_desc }}</p>
                     </div>
                   </div>
@@ -78,7 +78,11 @@
             @foreach ($users as $user)
               <div class="card flex-md-row mb-4 shadow-sm h-md-250">
                 <div class="card-body d-flex flex-column align-items-start">
-                  <strong class="d-inline-block mb-2 text-success">＃医療　＃治験　＃キャッシュレス　＃新規事業</strong>
+                  @if($user->tags->count() > 0)
+                    @foreach ($user->tags as $tag)
+                    <span class="d-inline-block mb-2 text-success">＃.{{$tag->tag_name}}</span>
+                    @endforeach
+                  @endif
                   <h3 class="mb-0">
                     <a class="text-dark" href="{{ url('user/'.$user->user_id) }}">{{ $user->name}}</a>
                   </h3>

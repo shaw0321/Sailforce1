@@ -15,7 +15,7 @@ class User extends Authenticatable
         protected $primaryKey = 'user_id';
     // Postsテーブルとのリレーション （主テーブル側）
      public function posts() {
-        return $this->hasMany('App\Models\Post');
+        return $this->hasMany('App\Models\Post','user_id');
     }
 
 // Postsテーブルとの多対多リレーション
@@ -25,7 +25,7 @@ class User extends Authenticatable
     
     // tagテーブルとの多対多リレーション
      public function tags() {
-        return $this->belongsToMany('App\Models\Tag');
+        return $this->belongsToMany('App\Models\Tag','user_tag','user_id','tag_id');
     }
 
     /**

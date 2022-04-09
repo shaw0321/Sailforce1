@@ -21,6 +21,8 @@ class PostsController extends Controller
     public function index(Request $request)
     {
         $searchwords = $request->searchwords ;
+
+
         
                // もし検索フォームにキーワードが入力されたら
         if ($searchwords !== null) {
@@ -28,6 +30,7 @@ class PostsController extends Controller
             // クエリビルダ
             $userquery = User::query();
             $postquery = Post::query();
+
 
             // 全角スペースを半角に変換
             $spaceConversion = mb_convert_kana($searchwords, 's');
@@ -40,15 +43,16 @@ class PostsController extends Controller
             foreach($wordArraySearched as $value) {
                 $userquery->where('name', 'like', '%'.$value.'%');
                 $postquery->where('post_title', 'like', '%'.$value.'%');
+   
             };
         }
-        
-        // $users = $userquery->toArray();
-        // $posts = $postquery->toArray();
 
+        $users = $userquery->get();
 
+        $posts = $postquery->get();
+// ->join('users', 'users.user_id', '=', 'posts.user_id')
         //
-        return view('searchresult' ,['posts' => $postquery, 'users' => $userquery ,'searchwords' => $searchwords ]);
+        return view('searchresult' ,['posts' => $posts, 'users' => $users ,'searchwords' => $searchwords ]);
     }
 
     /**

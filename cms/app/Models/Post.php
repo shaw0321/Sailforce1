@@ -12,9 +12,8 @@ class Post extends Model
     protected $primaryKey = 'post_id';
 
 // Userテーブルとのリレーション （主テーブル側）
-public function user(): BelongsTo
-    {
-        return $this->belongsTo('App\Models\User');
+public function user(){
+        return $this->belongsTo('App\Models\User', 'user_id', 'user_id');
     }
 // Userテーブルとの多対多リレーション
      public function favo_user() {
