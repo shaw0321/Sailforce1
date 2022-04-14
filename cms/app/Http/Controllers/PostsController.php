@@ -45,6 +45,8 @@ class PostsController extends Controller
                 $postquery->where('post_title', 'like', '%'.$value.'%');
    
             };
+        }else{
+            return view('index');
         }
 
         $users = $userquery->get();
@@ -63,6 +65,7 @@ class PostsController extends Controller
     public function create()
     {
         //
+        return view('postcreate');
     }
 
     /**
@@ -76,7 +79,7 @@ class PostsController extends Controller
         //バリデーション 
         $validator = Validator::make($request->all(), [
             'post_title' => 'required|max:255',
-            'post_desc' => 'required|max:255',
+            'post_body' => 'required|max:255',
         ]);
         
         //バリデーション:エラー
@@ -86,15 +89,30 @@ class PostsController extends Controller
                 ->withErrors($validator);
         }
         
+
+        // post登録処理
+        
+        
         //以下に登録処理を記述（Eloquentモデル）
         $posts = new Post;
         $posts->post_title = $request->post_title;
-        $posts->post_desc = $request->post_desc;
+        $posts->post_body = $request->post_body;
+        $posts->post_status = 1;
         $posts->user_id = Auth::id();//ここでログインしているユーザidを登録しています
         $posts->save();
         
+        // Tagに関する処理
+        // POST_中間テーブルに登録する
+        
         return redirect('/');
         
+    }
+    
+    
+    public function like(Request $request)
+    {
+        dd($request->data);
+        //
     }
 
     /**

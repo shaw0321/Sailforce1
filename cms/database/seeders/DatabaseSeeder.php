@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PostTableSeeder::class);
         $this->call(TagTableSeeder::class);
         $this->call(UserTagTableSeeder::class);
+        $this->call(FollowsTableSeeder::class);
         
         // $userIDs = \App\Models\User::pluck('user_id')->all();
         // $postIDs  = \App\Models\Post::pluck('post_id')->all();

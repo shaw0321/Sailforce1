@@ -10,8 +10,13 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
+    <script src="{{ asset('js/app.js') }}" defar ></script>
+    <script src="{{ asset('js/toggle.js') }}" defar ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" ></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"  />
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+  
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -23,7 +28,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ route('index') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -39,7 +44,32 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
+                            <li class="nav-item">
+                                     <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            投稿する
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                             <a class="dropdown-item" href="{{ URL('post') }}">記事</a>
+                                             <a class="dropdown-item" href="">質問</a>
+                                        </div>
+             
+                            </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ URL('post') }}">記事</a>
+                            </li>
                         @guest
+                                <!--<li class="nav-item">-->
+                                <!--    <div class="dropdown ">-->
+                                <!--        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                                <!--            投稿する-->
+                                <!--        </button>-->
+                                <!--        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
+                                <!--             <a class="dropdown-item" href="{{ URL('post') }}">記事</a>-->
+                                <!--             <a class="dropdown-item" href="">質問</a>-->
+                                <!--        </div>-->
+                                <!--    </div>-->
+                                <!--</li>-->
+
                             @if (Route::has('login'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -79,5 +109,6 @@
             @yield('content')
         </main>
     </div>
+    @stack('js')
 </body>
 </html>
