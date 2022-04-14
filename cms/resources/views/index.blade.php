@@ -28,9 +28,6 @@
         </form>
     
     </div>
- <input data-id="1" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="follow" data-off="folowing" checked >
- <input data-id="2" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="InActive" {{ 1 ? 'checked' : '' }}>
-
 
 @push('js')
     <script src="{{ asset('js/toggle.js') }}"></script>

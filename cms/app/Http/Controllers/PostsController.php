@@ -23,7 +23,7 @@ class PostsController extends Controller
         $searchwords = $request->searchwords ;
 
 
-        
+
                // もし検索フォームにキーワードが入力されたら
         if ($searchwords !== null) {
             

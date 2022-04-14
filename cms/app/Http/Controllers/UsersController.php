@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Collection;
 
 class UsersController extends Controller
 {
@@ -107,8 +108,8 @@ class UsersController extends Controller
                 
           }else{
             // フォロー解除する時の処理
+            $delete = DB::table('follows')->where('follow_id',$isFollow[0]->follow_id)->delete();
             
-            $isFollow->delete();
         
         }
             return response('OK', 200);

@@ -82,7 +82,8 @@
                   <div class="container">
                     <div class="row">
                         @foreach ($user->tags as $tag)
-                        <span class="d-inline-block mb-2 text-success col-sm-2">＃.{{$tag->tag_name}}</span>
+                        <!--<span class="d-inline-block mb-2 text-success col-sm-2">＃{{$tag->tag_name}}</span>-->
+                        <a class="d-inline  mb-2 text-success border border-success">＃{{$tag->tag_name}}</a>
                         @endforeach
                     </div>
                     </div>
@@ -94,7 +95,7 @@
                   <p class="card-text mb-auto">フォロワー{{ $user->followed->count()}}人　フォロー{{ $user->following->count()}}人</p>
                       <button type="submit" class="btn btn-primary">contact</button>
                       @if(Auth::check())
-                       <input data-id="{{ $user->user_id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="follow" data-off="folowing" checked >
+                       <input data-id="{{ $user->user_id}}" class="toggle-class" type="checkbox" data-onstyle="primary" data-offstyle="outline-light" data-toggle="toggle" data-on="follow中" data-off="followする" {{ Auth::user()->following->contains($user) ?  'checked' : ''}} >
                       
                       @endif
                 </div>
