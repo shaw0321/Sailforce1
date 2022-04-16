@@ -50,11 +50,11 @@ class SearchController extends Controller
    
             };
         }else{
-            return view('index');
+            $userquery = User::inRandomOrder()->take(10);
+            $postquery = Post::inRandomOrder()->take(10);
         }
 
         $users = $userquery->get();
-
         $posts = $postquery->get();
 // ->join('users', 'users.user_id', '=', 'posts.user_id')
         //

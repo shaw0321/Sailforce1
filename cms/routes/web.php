@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,7 +33,8 @@ Route::post('/post/markdown', function(Request $request){
     
      $converter = new \cebe\markdown\MarkdownExtra();
     $post_body = $converter->parse($request->post_body);
-    return $post_body ;
+    
+    return response($post_body , 200);
 }
 
 );

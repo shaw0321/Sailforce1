@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="card-body">
+<div >
     <form action="{{ url('post') }}" method="POST" class="form-horizontal">
          {{ csrf_field() }}
          <div class="container">
@@ -31,13 +31,11 @@
             <div class="row">
                 <div class="form-group col-sm-6">
                    <label for="post_body">post body</label>
-                   <textarea id="post_body" name="post_body" class="form-control"　rows="10"></textarea>
+                   <textarea id="post_body" name="post_body" class="form-control h-100 me-2"　rows="10"></textarea>
                 </div>
                 <div class="form-group col-sm-6">
-                    <div class="body" id="preview">
-                        preview
-
-                    </div>
+                    <label for="preview">preview</label>
+                    <div class="body" id="preview"></div>
 
                 </div>
             </div>
