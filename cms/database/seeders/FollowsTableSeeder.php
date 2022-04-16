@@ -17,7 +17,7 @@ class FollowsTableSeeder extends Seeder
 public function run()
     {
         //
-         for ($i = 0; $i < 100; $i++){
+         for ($i = 0; $i < 1000; $i++){
 
             // postsとtagsテーブルのidカラムをランダムに並び替え、先頭の値を取得
             $set_following_id = User::select('user_id')->orderByRaw("RAND()")->first()->user_id;

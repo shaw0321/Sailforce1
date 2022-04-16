@@ -28,6 +28,9 @@
         </form>
     
     </div>
+    
+
+        
 
 @push('js')
     <script src="{{ asset('js/toggle.js') }}"></script>

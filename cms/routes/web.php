@@ -17,11 +17,22 @@ Route::get('/', function(){
     return view('index');
 })-> name('index');
 
-Route::post('/searchresult', [App\Http\Controllers\PostsController::class, 'index']);
+// 検索に関するルーティング
+Route::post('/searchresult', [App\Http\Controllers\SearchController::class, 'normal']);
+Route::get('/tagsearch/{id}', [App\Http\Controllers\SearchController::class, 'tag']);
+
+
+
+// POSTに関するルーティング
+Route::get('/post/{id}', [App\Http\Controllers\PostsController::class, 'show']);
 Route::get('/post', [App\Http\Controllers\PostsController::class, 'create']);
 Route::post('/post', [App\Http\Controllers\PostsController::class, 'store']);
 
 // Route::get('/post/like', [App\Http\Controllers\PostsController::class, 'like']);
+
+// Userに関するルーティング
+
+Route::get('/user/{id}', [App\Http\Controllers\UsersController::class, 'show']);
 Route::post('/user/follow', [App\Http\Controllers\UsersController::class, 'follow']);
 
 Auth::routes();

@@ -2,23 +2,27 @@
 
 namespace App\Http\Controllers;
 
-
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use App\Models\Post; //この行を上に追加
 use App\Models\User;//この行を上に追加
+use App\Models\Tag;//この行を上に追加
 use Auth;//この行を上に追加
 use Validator;//この行を上に追加
 
-class PostsController extends Controller
+class SearchController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
+    {
+        //
+    }
+
+    public function normal(Request $request)
     {
         $searchwords = $request->searchwords ;
 
@@ -57,6 +61,21 @@ class PostsController extends Controller
         return view('searchresult' ,['posts' => $posts, 'users' => $users ,'searchwords' => $searchwords ]);
     }
 
+
+    public function tag($id)
+    {
+        //
+        dd( Tag::find($id)->tags);
+        $users = Tag::find($id)->tag_user->get();
+        $post ="";
+        
+        $searchwords = Tag::find($id)->tag_name;
+        
+        return view('searchresult' ,['posts' => $posts, 'users' => $users ,'searchwords' => $searchwords ]);
+        
+   
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -65,7 +84,6 @@ class PostsController extends Controller
     public function create()
     {
         //
-        return view('postcreate');
     }
 
     /**
@@ -74,44 +92,8 @@ class PostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-     public function store(Request $request)
+    public function store(Request $request)
     {
-        //バリデーション 
-        $validator = Validator::make($request->all(), [
-            'post_title' => 'required|max:255',
-            'post_body' => 'required|max:255',
-        ]);
-        
-        //バリデーション:エラー
-        if ($validator->fails()) {
-            return redirect('/')
-                ->withInput()
-                ->withErrors($validator);
-        }
-        
-
-        // post登録処理
-        
-        
-        //以下に登録処理を記述（Eloquentモデル）
-        $posts = new Post;
-        $posts->post_title = $request->post_title;
-        $posts->post_body = $request->post_body;
-        $posts->post_status = 1;
-        $posts->user_id = Auth::id();//ここでログインしているユーザidを登録しています
-        $posts->save();
-        
-        // Tagに関する処理
-        // POST_中間テーブルに登録する
-        
-        return redirect('/');
-        
-    }
-    
-    
-    public function like(Request $request)
-    {
-        dd($request->data);
         //
     }
 
@@ -124,12 +106,6 @@ class PostsController extends Controller
     public function show($id)
     {
         //
-        
-        $post=Post::find($id);
-        
-        return view('post', ['post' => $post]);
-        
-        
     }
 
     /**

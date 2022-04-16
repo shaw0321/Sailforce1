@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Collection;
+use App\Models\Post; //この行を上に追加
+use App\Models\User;//この行を上に追加
 
 class UsersController extends Controller
 {
@@ -49,6 +51,11 @@ class UsersController extends Controller
     public function show($id)
     {
         //
+        $user = User::find($id);
+
+        return view('user',['user' => $user]);
+        
+        
     }
 
     /**

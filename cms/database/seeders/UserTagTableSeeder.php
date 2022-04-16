@@ -18,7 +18,7 @@ class UserTagTableSeeder extends Seeder
     public function run()
     {
         //
-         for ($i = 0; $i < 30; $i++){
+         for ($i = 0; $i < 100; $i++){
 
             // postsとtagsテーブルのidカラムをランダムに並び替え、先頭の値を取得
             $set_user_id = User::select('user_id')->orderByRaw("RAND()")->first()->user_id;
