@@ -17,6 +17,7 @@
   
     <script src="{{ asset('js/app.js') }}" defar ></script>
     <script src="{{ asset('js/toggle.js') }}" defar ></script>
+    <script src="{{ asset('js/markdown.js') }}" defar ></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">

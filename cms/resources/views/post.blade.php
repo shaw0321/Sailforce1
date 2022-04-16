@@ -11,6 +11,13 @@
 
 <div>{{ $post->user_id }}</div>
 
+<div class="body">
+   @php
+     $converter = new \cebe\markdown\MarkdownExtra();
+     $post_body = $converter->parse($post->post_body);
+   @endphp  
+   {!! $post_body !!}
+</div>
 
 @push('js')
     <script src="{{ asset('js/toggle.js') }}"></script>

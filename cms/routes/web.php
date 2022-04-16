@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,6 +27,16 @@ Route::get('/tagsearch/{id}', [App\Http\Controllers\SearchController::class, 'ta
 Route::get('/post/{id}', [App\Http\Controllers\PostsController::class, 'show']);
 Route::get('/post', [App\Http\Controllers\PostsController::class, 'create']);
 Route::post('/post', [App\Http\Controllers\PostsController::class, 'store']);
+
+Route::post('/post/markdown', function(Request $request){
+    
+     $converter = new \cebe\markdown\MarkdownExtra();
+    $post_body = $converter->parse($request->post_body);
+    return $post_body ;
+}
+
+);
+
 
 // Route::get('/post/like', [App\Http\Controllers\PostsController::class, 'like']);
 
