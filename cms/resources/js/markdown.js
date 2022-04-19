@@ -21,6 +21,7 @@ $("#post_body").on('change', function(){
          .done(function(data, html){
            console.log('success');
           console.log(data);
+          $("#preview").empty();
           $("#preview").append(data);
           
          })

@@ -21,9 +21,6 @@ class PostsController extends Controller
     public function index(Request $request)
     {
         $searchwords = $request->searchwords ;
-
-
-
                // もし検索フォームにキーワードが入力されたら
         if ($searchwords !== null) {
             
@@ -48,9 +45,7 @@ class PostsController extends Controller
         }else{
             return view('index');
         }
-
         $users = $userquery->get();
-
         $posts = $postquery->get();
 // ->join('users', 'users.user_id', '=', 'posts.user_id')
         //
@@ -79,7 +74,7 @@ class PostsController extends Controller
         //バリデーション 
         $validator = Validator::make($request->all(), [
             'post_title' => 'required|max:255',
-            'post_body' => 'required|max:255',
+            'post_body' => 'required|max:10000',
         ]);
         
         //バリデーション:エラー
@@ -89,22 +84,19 @@ class PostsController extends Controller
                 ->withErrors($validator);
         }
         
-
         // post登録処理
-        
-        
         //以下に登録処理を記述（Eloquentモデル）
         $posts = new Post;
         $posts->post_title = $request->post_title;
+        $posts->post_desc = $request->post_desc;
         $posts->post_body = $request->post_body;
         $posts->post_status = 1;
         $posts->user_id = Auth::id();//ここでログインしているユーザidを登録しています
         $posts->save();
         
-        // Tagに関する処理
-        // POST_中間テーブルに登録する
+        //  return redirect('/');
         
-        return redirect('/');
+         return view('post', ['post' => $posts]);
         
     }
     
@@ -141,6 +133,9 @@ class PostsController extends Controller
     public function edit($id)
     {
         //
+        $post = Post::find($id);
+        
+        return view('postedit', ['post' => $post]);
     }
 
     /**
@@ -152,7 +147,32 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+  
+        //バリデーション 
+        $validator = Validator::make($request->all(), [
+            'post_title' => 'required|max:255',
+            'post_body' => 'required|max:10000',
+        ]);
+        
+        //バリデーション:エラー
+        if ($validator->fails()) {
+            return redirect('/')
+                ->withInput()
+                ->withErrors($validator);
+        }
+        
+        // post登録処理
+        //以下に登録処理を記述（Eloquentモデル）
+        $post = Post::find($id);
+        $post->post_title = $request->post_title;
+        $post->post_desc = $request->post_desc;
+        $post->post_body = $request->post_body;
+        $post->post_status = 1;
+        $post->save();
+        
+        //  return redirect('/');
+        
+         return view('post', ['post' => $post]);
     }
 
     /**
@@ -164,5 +184,11 @@ class PostsController extends Controller
     public function destroy($id)
     {
         //
+        $post = Post::find($id);
+        $post-> delete();
+        $user = Auth::user();
+        
+        return view('user', ['user' => $user]);
     }
+    
 }

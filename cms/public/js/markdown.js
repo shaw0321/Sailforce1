@@ -24,6 +24,7 @@ $(function () {
     }).done(function (data, html) {
       console.log('success');
       console.log(data);
+      $("#preview").empty();
       $("#preview").append(data);
     }).fail(function (result) {
       console.log('fail');

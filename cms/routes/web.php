@@ -14,11 +14,12 @@ use Illuminate\Http\Response;
 |
 */
 
-Route::get('/', function(){
-    return view('index');
-})-> name('index');
+// Route::get('/', function(){
+//     return view('index');
+// })-> name('index');
 
 // 検索に関するルーティング
+Route::get('/', [App\Http\Controllers\SearchController::class, 'index'])-> name('index');
 Route::post('/searchresult', [App\Http\Controllers\SearchController::class, 'normal']);
 Route::get('/tagsearch/{id}', [App\Http\Controllers\SearchController::class, 'tag']);
 
@@ -28,6 +29,9 @@ Route::get('/tagsearch/{id}', [App\Http\Controllers\SearchController::class, 'ta
 Route::get('/post/{id}', [App\Http\Controllers\PostsController::class, 'show']);
 Route::get('/post', [App\Http\Controllers\PostsController::class, 'create']);
 Route::post('/post', [App\Http\Controllers\PostsController::class, 'store']);
+Route::put('/post/{id}', [App\Http\Controllers\PostsController::class, 'edit']);
+Route::patch('/post/{id}', [App\Http\Controllers\PostsController::class, 'update']);
+Route::delete('/post/{id}', [App\Http\Controllers\PostsController::class, 'destroy']);
 
 Route::post('/post/markdown', function(Request $request){
     

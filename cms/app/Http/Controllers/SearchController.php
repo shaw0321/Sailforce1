@@ -20,6 +20,15 @@ class SearchController extends Controller
     public function index()
     {
         //
+        $userquery = User::inRandomOrder()->take(10);
+        $postquery = Post::inRandomOrder()->take(10);
+
+        $users = $userquery->get();
+        $posts = $postquery->get();
+// ->join('users', 'users.user_id', '=', 'posts.user_id')
+        //
+        return view('index' ,['posts' => $posts, 'users' => $users ]);
+   
     }
 
     public function normal(Request $request)
