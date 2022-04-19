@@ -22,7 +22,9 @@ public function user(){
     
     // tagテーブルとの多対多リレーション
      public function tags() {
-        return $this->belongsToMany('App\Models\Tag');
+        return $this->belongsToMany('App\Models\Tag','post_tag','post_id','tag_id');
     }
+    
+
 
 }

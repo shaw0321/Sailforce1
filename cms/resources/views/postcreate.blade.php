@@ -4,7 +4,7 @@
 
 <div >
     
-    <form action="{{ url('post') }}" method="POST" class="form-horizontal">
+    <form action="{{ url('post') }}" method="POST" class="form-horizontal mh-100">
          {{ csrf_field() }}
          <div class="container">
              
@@ -32,7 +32,7 @@
             <div class="row">
                 <div class="form-group col-sm-6 card">
                    <label for="post_body">post body　※必須</label>
-                   <textarea id="post_body" name="post_body" class="form-control  me-2"　rows="10"></textarea>
+                   <textarea id="post_body" name="post_body" class="form-control  me-2"　></textarea>
                 </div>
                 
                 <div class="form-group col-sm-6 card">

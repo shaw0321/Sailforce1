@@ -28,13 +28,13 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Tag','user_tag','user_id','tag_id');
     }
 
-    // tagテーブルとの多対多リレーション
+    // userテーブルとの多対多リレーション
      public function following() {
         return $this->belongsToMany('App\Models\User','follows','following_id','followed_id');
     }
     
     
-    // tagテーブルとの多対多リレーション
+    // userテーブルとの多対多リレーション
      public function followed() {
         return $this->belongsToMany('App\Models\User','follows','followed_id','following_id');
     }

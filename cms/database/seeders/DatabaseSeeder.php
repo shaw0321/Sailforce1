@@ -17,30 +17,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-        $this->call(UserTableSeeder::class);
+
+        // $this->call(UserTableSeeder::class);
         $this->call(PostTableSeeder::class);
-        $this->call(TagTableSeeder::class);
-        $this->call(UserTagTableSeeder::class);
-        $this->call(FollowsTableSeeder::class);
+        // $this->call(TagTableSeeder::class);
+        // $this->call(UserTagTableSeeder::class);
+        $this->call(PostTagTableSeeder::class);
+        // $this->call(FollowsTableSeeder::class);
         
-        // $userIDs = \App\Models\User::pluck('user_id')->all();
-        // $postIDs  = \App\Models\Post::pluck('post_id')->all();
-        
-        // for($i = 1; $i <= 50; $i++){
-        // DB::table('user_tag')->insert([
-        //         'user_id' => $userIDs->random(),
-        //         'tag_id' =>  $postIDs->random(),
-        //     ]);
-        // }
-        
-        // for($i = 1; $i <=20; $i++){
-        //     $UserTag =[
-        //         'user_id' => random_int(1,100),
-        //         'tag_id' =>  random_int(1,100),
-        //         ];
-        //     DB::table('user_tag')->insert($UserTag);
-        // }
+
 
     }
 }

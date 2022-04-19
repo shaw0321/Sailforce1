@@ -32,7 +32,7 @@
             <div class="container">
                 <a class="navbar-brand" href="{{ route('index') }}">
                     <!--{{ config('app.name', 'Laravel') }}-->
-                    Sail Force
+                    Pioneer's Works
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -58,7 +58,7 @@
              
                             <!--</li>-->
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ URL('post') }}">記事</a>
+                                    <a class="nav-link" href="{{ URL('post') }}">記事作成</a>
                             </li>
                         @guest
 
